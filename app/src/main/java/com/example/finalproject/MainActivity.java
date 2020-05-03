@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,9 +18,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<Weight> weightAdapter;
     List<Weight> weightList;
     int positionSelected;
-    Weight weightSelected;
     ListView ListViewWeight;
-
+    SharedPreferences sharedpreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
         weightDataSource = new WeightDataSource(this);
         weightDataSource.open();
 
-        ListViewWeight = (ListView) findViewById(R.id.ListViewWeight);
+        ListViewWeight = findViewById(R.id.ListViewWeight);
         weightList = weightDataSource.getAllWeight();
-        weightAdapter = new WeightAdapter(this, android.R.layout.simple_list_item_single_choice, weightList);
+        String value = sharedpreference.getString("button_save","");
+        weightAdapter = new WeightAdapter(this, android.R.layout.simple_list_item_single_choice, weightList, value);
         ListViewWeight.setAdapter(weightAdapter);
         ListViewWeight.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonAdd = (Button) findViewById(R.id.buttonAdd);
+
+        buttonAdd = findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent detailActIntent = new Intent(view.getContext(), AddWeightActivity.class);
@@ -48,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(detailActIntent);
             }
         });
-        buttonDetails = (Button) findViewById(R.id.buttonDetails);
+
+        buttonDetails = findViewById(R.id.buttonDetails);
         buttonDetails.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Log.d("MAIN", "onClick for Details");
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonRemove = (Button) findViewById(R.id.buttonRemove);
+        buttonRemove = findViewById(R.id.buttonRemove);
         buttonRemove.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("MAIN", "onClick for Remove");

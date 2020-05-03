@@ -3,25 +3,25 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import java.util.Date;
+
 
 public class MySQLiteHelper extends SQLiteOpenHelper{
-    public static final String TABLE_WEIGHT = "Weight";
+    static final String TABLE_WEIGHT = "Weight";
 
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_WEIGHT = "weightLoss";
-    public static final String COLUMN_DATE = "date";
-    public static final String COLUMN_TIME = "time";
+    static final String COLUMN_ID = "_id";
+    static final String COLUMN_WEIGHT = "weightLoss";
+    static final String COLUMN_DATE = "date";
+    static final String COLUMN_TIME = "time";
 
-    public static final String DATABASE_NAME = "weight.db";
+    private static final String DATABASE_NAME = "weight.db";
     private static final int DATABASE_VERSION = 101;
 
     private static final String DATABASE_CREATE = "create table " + TABLE_WEIGHT +
-            "(" + COLUMN_ID + "integer primary key autoincrement, " + COLUMN_WEIGHT +
-            " TEXT not null, " + COLUMN_DATE + "TEXT, " + COLUMN_TIME + "TEXT" + ");";
+            "(" + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_WEIGHT +
+            " TEXT not null, " + COLUMN_DATE + " TEXT, " + COLUMN_TIME + " TEXT" + ");";
 
     private static MySQLiteHelper sInstance;
-    public static synchronized MySQLiteHelper getInstance(Context context) {
+    static synchronized MySQLiteHelper getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new MySQLiteHelper(context.getApplicationContext());
         }

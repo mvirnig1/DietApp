@@ -56,6 +56,11 @@
         android:text="Name" />
 
     <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+    <Button
         android:id="@+id/buttonReturn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

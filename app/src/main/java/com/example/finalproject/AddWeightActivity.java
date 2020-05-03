@@ -22,11 +22,11 @@ public class AddWeightActivity extends AppCompatActivity {
         weightDataSource = new WeightDataSource(this);
         weightDataSource.open();
 
-        editTextWeight = (EditText) findViewById(R.id.editTextWeight);
-        editTextDate = (EditText) findViewById(R.id.editTextDate);
-        editTextTime = (EditText) findViewById(R.id.editTextTime);
+        editTextWeight = findViewById(R.id.editTextWeight);
+        editTextDate = findViewById(R.id.editTextDate);
+        editTextTime = findViewById(R.id.editTextTime);
 
-        buttonSave = (Button) findViewById(R.id.buttonSave);
+        buttonSave = findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String weight = editTextWeight.getText().toString();

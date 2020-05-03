@@ -7,23 +7,23 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeightDataSource {
+class WeightDataSource {
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
 
-    public WeightDataSource(Context context) {
+    WeightDataSource(Context context) {
         dbHelper = MySQLiteHelper.getInstance(context);
     }
 
-    public void open() throws SQLException {
+    void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
     }
 
-    public void close() {
+    void close() {
         dbHelper.close();
     }
 
-    public Weight createWeight(String weightLoss, String date, String time) {
+    Weight createWeight(String weightLoss, String date, String time) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_WEIGHT, weightLoss);
         values.put(MySQLiteHelper.COLUMN_DATE, date);
@@ -34,14 +34,14 @@ public class WeightDataSource {
         return newWeight;
     }
 
-    public void deleteWeight(Weight weight) {
+    void deleteWeight(Weight weight) {
         long id = weight.getId();
         System.out.println("Weight deleted with id: " + id);
         database.delete(MySQLiteHelper.TABLE_WEIGHT, MySQLiteHelper.COLUMN_ID
                 + " = " + id, null);
     }
 
-    public List<Weight> getAllWeight() {
+    List<Weight> getAllWeight() {
         List<Weight> weightList = new ArrayList<Weight>();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_WEIGHT,       //Modified to return all database fields
